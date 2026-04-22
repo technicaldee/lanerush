@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "celo-skill": {
+      "source": "celo-org/skills",
+      "sourceType": "github",
+      "computedHash": "1390c976df255b9584bd19c7c40b30cff034c6d3dbe13e8d1d314fe2c4a4cd5d"
+    }
+  }
+}

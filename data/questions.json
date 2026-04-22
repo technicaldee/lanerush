@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "question": "Which planet is known as the Red Planet?",
+      "options": ["Venus", "Mars", "Jupiter", "Mercury"],
+      "correctIndex": 1
+    },
+    {
+      "question": "How many continents are on Earth?",
+      "options": ["Five", "Six", "Seven", "Eight"],
+      "correctIndex": 2
+    },
+    {
+      "question": "What is 12 + 8?",
+      "options": ["18", "19", "20", "22"],
+      "correctIndex": 2
+    },
+    {
+      "question": "Which ocean is the largest?",
+      "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+      "correctIndex": 3
+    },
+    {
+      "question": "Which animal is a mammal?",
+      "options": ["Shark", "Dolphin", "Trout", "Octopus"],
+      "correctIndex": 1
+    },
+    {
+      "question": "What color do you get by mixing red and blue?",
+      "options": ["Green", "Orange", "Purple", "Yellow"],
+      "correctIndex": 2
+    },
+    {
+      "question": "Which language runs in the browser?",
+      "options": ["C++", "Python", "JavaScript", "Rust"],
+      "correctIndex": 2
+    },
+    {
+      "question": "What is the capital of France?",
+      "options": ["Berlin", "Madrid", "Paris", "Rome"],
+      "correctIndex": 2
+    },
+    {
+      "question": "Which shape has three sides?",
+      "options": ["Square", "Triangle", "Circle", "Rectangle"],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the boiling point of water at sea level in Celsius?",
+      "options": ["80", "90", "100", "120"],
+      "correctIndex": 2
+    }
+  ]
+}
