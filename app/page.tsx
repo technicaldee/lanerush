@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
-
-const HomePage = dynamic(
-  () => import("@/components/HomePage").then((m) => m.HomePage),
-  { ssr: false, loading: () => <p className="panel-hint">Loading…</p> },
-);
+import { HomePageClient } from "./home-page-client";
 
 export const metadata: Metadata = {
   other: {
@@ -14,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <HomePage />;
+  return <HomePageClient />;
 }
