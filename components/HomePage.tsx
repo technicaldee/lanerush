@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { formatUnits, maxUint256, parseUnits } from "viem";
-import { useAccount, useBalance, useConnect, useReadContract, useWriteContract } from "wagmi";
+import { useAccount, useBalance, useConnect, useReadContract, useWriteContract, useSwitchChain } from "wagmi";
 import { injected } from "wagmi/connectors";
+import { appChain } from "@/lib/chains";
 import { waitForTransactionReceipt } from "wagmi/actions";
 import { ArcadeRunnerGame } from "@/components/ArcadeRunnerGame";
 import { Leaderboard } from "@/components/Leaderboard";
@@ -28,9 +29,10 @@ function truncateAddress(address?: string) {
 }
 
 export function HomePage() {
-  const { address, isConnected } = useAccount();
+  const { address, isConnected, chainId } = useAccount();
   const { connect, connectors } = useConnect();
   const { writeContractAsync } = useWriteContract();
+  const { switchChainAsync } = useSwitchChain();
   const setQuestionBank = useGameStore((state) => state.setQuestionBank);
   const setStakeId = useGameStore((state) => state.setStakeId);
   const startGame = useGameStore((state) => state.startGame);
@@ -119,6 +121,19 @@ export function HomePage() {
     if (!isConnected && preferredConnector) {
       connect({ connector: preferredConnector });
       return;
+    }
+    if (chainId !== appChain.id) {
+      if (!switchChainAsync) {
+        setToast({ kind: "error", message: "Please switch to the Celo network in your wallet." });
+        return;
+      }
+      try {
+        await switchChainAsync({ chainId: appChain.id });
+        return;
+      } catch (error) {
+        setToast({ kind: "error", message: "Failed to switch to the Celo network." });
+        return;
+      }
     }
     if (!address || !CUSD || !GAME) {
       setToast({ kind: "error", message: "Missing contract setup." });
@@ -249,7 +264,7 @@ export function HomePage() {
               onClick={() => void onPrimaryAction()}
               disabled={isStarting || !assetsReady}
             >
-              {!assetsReady ? "Loading..." : !isConnected ? "Connect Wallet" : isStarting ? "Starting..." : "Start"}
+              {!assetsReady ? "Loading..." : !isConnected ? "Connect Wallet" : (chainId !== appChain.id) ? "Switch to Celo" : isStarting ? "Starting..." : "Start"}
             </button>
             <p className="home-hero__stake-note">
               {currency === "cUSD"
